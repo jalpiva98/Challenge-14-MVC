@@ -1,0 +1,52 @@
+<main class="container mt-5">
+  <h1 class="mb-4 text-dark">Edita tus publicaciones</h1>
+  <form class="update-tech-post-form mb-3">
+    <!-- campos que ya existen -->
+    <div class="mb-3">
+      <label for="title-update-tech-post" class="form-label">Title</label>
+      <input
+        type="text"
+        class="form-control"
+        id="title-update-tech-post"
+        placeholder="Enter post title"
+        value="{{title}}"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="content-update-tech-post" class="form-label">Content</label>
+      <textarea
+        class="form-control"
+        id="content-update-tech-post"
+        rows="3"
+        placeholder="Enter post content"
+      >{{content}}</textarea>
+    </div>
+
+    <!-- nuevos camposs -->
+    <div class="mb-3">
+      <label for="category-update-tech-post" class="form-label">Category</label>
+      <input
+        type="text"
+        class="form-control"
+        id="category-update-tech-post"
+        placeholder="Enter category"
+        value="{{category}}"
+      />
+    </div>
+
+    </div>
+    <div class="mb-3">
+      <label for="time-update-tech-post" class="form-label">Date</label>
+      <input
+        type="text"
+        class="form-control"
+        id="time-update-tech-post"
+        placeholder="Enter date"
+        value="{{time}}"
+      />
+    </div>
+
+    <button type="button" data-action="update" id="update-tech-post" class="action-tech-post bg-green-700 hover:bg-green-800 text-white px-4 py-2 rounded">Edit your post</button>
+    <button type="button" id="delete-tech-post" class="bg-red-700 hover:bg-red-800 text-white px-4 py-2 rounded delete-post" data-post-id="{{id}}">Delete your post</button>
+  </form>
+</main>

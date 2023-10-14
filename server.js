@@ -1,25 +1,38 @@
-//this code sets up the sequelize instance for connecting to mysqldatabase
-//it uses a database configuration specified in the .env file
-//we export it to all the app
+const express = require('express');
+const session = require('express-session');
+const routes = require('./routes');
+const sequelize = require('./config/connection');
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
+const expressHandlebars = require("express-handlebars");
+const handlebars = expressHandlebars.create({helpers:require("./utils/helpers")});
 
-const Sequelize = require('sequelize');
-require('dotenv').config();
 
-let sequelize;
+//express app and port
+const app = express();
+const PORT = process.env.PORT || 3001;
 
-if (process.env.JAWSDB_URL) {
-  sequelize = new Sequelize(process.env.JAWSDB_URL);
-} else {
-  sequelize = new Sequelize(
-    process.env.DB_NAME,
-    process.env.DB_USER,
-    process.env.DB_PASSWORD,
-    {
-      host: 'localhost',
-      dialect: 'mysql',
-      port: 3306
-    }
-  );
-}
+//session with a cookie and store in sequelizestore
+const sess = {
+  secret: 'Super secret secret',
+  cookie: {},
+  resave: false,
+  saveUninitialized: true,
+  store: new SequelizeStore({
+    db: sequelize
+  })
+};
 
-module.exports = sequelize;
+
+app.use(session(sess));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static('public'));
+app.engine("handlebars", handlebars.engine);
+app.set("view engine", "handlebars");
+
+
+app.use(routes);
+
+sequelize.sync({ force: false }).then(() => {
+  app.listen(PORT, () => console.log(`App listening on port ${PORT}!`));
+});

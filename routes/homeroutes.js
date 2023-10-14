@@ -24,7 +24,7 @@ router.get("/", async (req, res) => {
 // Route to render individual post page
 router.get("/post/:id", withAuth, async (req, res) => {
   try {
-        //  it gets also the user and the comments they made in each post
+
     const postData = await Post.findByPk(req.params.id, {
       include: [
         { model: User, attributes: ["username"] },
@@ -34,12 +34,10 @@ router.get("/post/:id", withAuth, async (req, res) => {
         },
       ],
     });
-    // we algo pass post data to plain JavaScript object
+
     const post = postData.get({ plain: true });
-    // next we render post template with the post data and if it is logged in 
-    //added console log, because i made an error with capital letters and it was not showing anything
-    //gonna leave that there for future ref
-    console.log(`ESTO ES EL POST: ${Object.keys(post.User)}`);
+
+    console.log(`POST: ${Object.keys(post.User)}`);
     res.render("post", {
       ...post,
       logged_in: req.session.logged_in,
@@ -48,15 +46,15 @@ router.get("/post/:id", withAuth, async (req, res) => {
     res.status(500).json(err);
   }
 });
-// this is the route to that renders the dashboard page with all posts by the current user
-// and its user nameeee
+
+// this is the route  that renders the dashboard page with all posts by the current user
 router.get("/dashboard", withAuth, async (req, res) => {
   try {
     const postData = await Post.findAll({
       where: { user_id: req.session.user_id },
       include: [{ model: User, attributes: ["username"] }],
     });
-    // again we pass post data to plain js obj
+
     const posts = postData.map((post) => post.get({ plain: true }));
 
     res.render("dashboard", {

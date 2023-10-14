@@ -1,0 +1,31 @@
+<main class="container mt-5">
+  <br>
+  <h1 class="block mx-auto mb-4 h-10 bg-teal-900 rounded-md text-white py-2 text-center">Your Posts</h1>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    {{#each posts}}
+      <div class="w-full p-4 shadow-[5px_5px_rgba(0,_98,_90,_0.4),_10px_10px_rgba(0,_98,_90,_0.3),_15px_15px_rgba(0,_98,_90,_0.2),_20px_20px_rgba(0,_98,_90,_0.1),_25px_25px_rgba(0,_98,_90,_0.05)]">
+        <h2 class="text-xl font-semibold text-center text-dark"><a href="/post/{{id}}">{{title}}</a></h2>
+        <p class="mt-4 text-dark">{{content}}</p>
+        <p class="mt-2 text-sm">By {{User.username}} on {{format_date createdAt}}</p>
+        <div class="text-center mt-4 grid grid-cols-2">
+
+          <a href="/editpost/{{id}}" class="bg-lime-700 hover:bg-lime-800 text-white px-4 py-2 rounded">
+            Edit
+          </a>
+          <button class="bg-red-700 ml-2 hover:bg-red-800 text-white px-4 py-2 rounded delete-post" data-post-id="{{id}}">
+
+            Delete
+          </button>
+        </div>
+      </div>
+    {{/each}}
+  </div>
+  <div class="mb-3 text-center">
+    <h2 class="mb-4 mt-3 text-dark text-3xl text-center">Write your owN post here!</h2>
+
+    <a href="/newpost" class="bg-lime-700 hover:bg-lime-800 text-white px-4 py-2 rounded">
+
+      New post
+    </a>
+  </div>
+</main>
