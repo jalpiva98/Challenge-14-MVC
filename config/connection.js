@@ -1,7 +1,3 @@
-//this code sets up the sequelize instance for connecting to mysqldatabase
-//it uses a database configuration specified in the .env file
-//we export it to all the app
-
 const Sequelize = require('sequelize');
 require('dotenv').config();
 
