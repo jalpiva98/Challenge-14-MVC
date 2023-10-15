@@ -44,7 +44,7 @@ Once the server is running, you can use API testing tools like Insomnia or Postm
 ## API Routes
 
 ```md
-Link to deployed app: 
+Link to deployed app: https://mvc-techblog101-d9ea524447d9.herokuapp.com/ 
 ```
 ## Preview
 
